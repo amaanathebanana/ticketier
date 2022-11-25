@@ -7,7 +7,7 @@ module.exports = {
         if (interaction.isChatInputCommand()) {
             const command = client.commands.get(interaction.commandName);
             if (!command) return;
-            if (command.developer && interaction.user.id !== botDeveloper)
+            if (command.developer && (!interaction.member._roles.includes(config.staffId)))
                 return interaction.reply({
                     content: "You do not have access to this command!",
                     ephemeral: true
@@ -18,7 +18,7 @@ module.exports = {
             const button = client.buttons.get(interaction.customId);
             if (!button) return;
             if (button == undefined) return;
-            if (button.developer && !interaction.user.id != botDeveloper) {
+            if (button.developer && (!interaction.member._roles.includes(config.staffId))) {
                 return interaction.reply({
                     content: "You do not have access to this button!",
                     ephemeral: true
@@ -30,7 +30,7 @@ module.exports = {
             const selectMenu = client.selectMenus.get(interaction.customId);
             if (!selectMenu) return;
             if (selectMenu == undefined) return;
-            if (selectMenu.developer && interaction.user.id !== botDeveloper)
+            if (selectMenu.developer && (!interaction.member._roles.includes(config.staffId)))
                 return interaction.reply({
                     content: "You do not have permission to use this!",
                     ephemeral: true
@@ -41,7 +41,7 @@ module.exports = {
             const modal = client.modals.get(interaction.customId);
             if (!modal) return;
             if (modal == undefined) return;
-            if (modal.developer && interaction.user.id !== botDeveloper)
+            if (modal.developer && (!interaction.member._roles.includes(config.staffId)))
                 return interaction.reply({
                     content: "You do not have access to this modal!",
                     ephemeral: true
